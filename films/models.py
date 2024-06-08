@@ -1,11 +1,19 @@
 from django.db import models
 from django.conf import settings
 
+certs = [
+    ("U", "U"),
+    ("PG", "PG"),
+    ("12a", "12a"),
+    ("15", "15"),
+    ("18", "18"),
+]
+
 
 class Film(models.Model):
     title = models.CharField(max_length=250)
     released = models.DateField(auto_now=False, auto_now_add=False)
-    certificate = models.CharField(max_length=3)
+    certificate = models.CharField(max_length=3, choices=certs)
     duration = models.DurationField()
     genre = models.CharField(max_length=100)
     director = models.CharField(max_length=250)
