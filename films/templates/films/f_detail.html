@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>IMDB Clone</title>
-    </head>
-    <body>
-        <h1>{{ film.title }}</h1>
-        <p>{{ film.overview }}</p>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ film.title }}</h1>
+    <p>{{ film.overview }}</p>
+{% endblock content %}

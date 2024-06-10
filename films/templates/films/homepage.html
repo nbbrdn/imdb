@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>IMDB Clone</title>
-    </head>
-    <body>
-        <h1>IMDB Clone</h1>
-        <hr>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>IMDB Clone</h1>
+    <hr>
+
+    <div class="row row-cols-5">
         {% for film in films %}
-            <a href="{% url 'films:f_detail' film.pk %}">{{ film.title }}</a>
+            <div class="mb-3">
+                <div class="card" style="min-height: 450px;">
+                    <img src="{{ film.poster }}" class="card-img-top" height="300px" width="200px">
+                    <div class="card-body">
+                        <h4>
+                            <i class="bi bi-star-fill text-warning"></i> <span class="me-5">8.8</span>
+                            <i class="bi bi-star text-primary"></i>
+                        </h4>
+                        <h5><a href="{% url 'films:f_detail' film.id %}">{{ film.title }}</a></h5>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </body>
-</html>
+    </div>
+{% endblock content %}

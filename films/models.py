@@ -4,6 +4,7 @@ from django.conf import settings
 certs = [
     ("U", "U"),
     ("PG", "PG"),
+    ("R", "R"),
     ("12a", "12a"),
     ("15", "15"),
     ("18", "18"),
