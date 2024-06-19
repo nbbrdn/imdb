@@ -2,6 +2,7 @@ from datetime import timedelta
 import json
 import os
 
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 
@@ -43,7 +44,12 @@ def add_films(request):
 
 def homepage(request):
     films = Film.objects.all()
-    context = {"films": films}
+
+    paginator = Paginator(films, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj}
     return render(request, "films/homepage.html", context)
 
 
@@ -54,6 +60,7 @@ def film_detail(request, pk):
     hours = total_seconds // 3600
     minutes = (total_seconds % 3600) // 60
     duration = f"{hours}h {minutes}m"
+    genres = film.genre.split(",")
 
-    context = {"film": film, "duration": duration}
+    context = {"film": film, "duration": duration, "genres": genres}
     return render(request, "films/f_detail.html", context)
