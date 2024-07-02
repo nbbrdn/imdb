@@ -1,10 +1,12 @@
 from datetime import timedelta
 import json
 import os
+from random import randint
 
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .models import Film, Rating
 
@@ -64,3 +66,21 @@ def film_detail(request, pk):
 
     context = {"film": film, "duration": duration, "genres": genres}
     return render(request, "films/f_detail.html", context)
+
+
+def add_rev(g_film, g_user, g_rating):
+    print(g_film)
+    Rating.objects.update_or_create(
+        film=get_object_or_404(Film, pk=g_film),
+        user=get_object_or_404(User, pk=g_user),
+        rating=g_rating,
+    )
+
+
+def add_reviews(request):
+    for j in range(0, 10000):
+        for i in range(1, 5):
+            film_id = randint(2, 692)
+            film_rating = randint(1, 10)
+            add_rev(film_id, i, film_rating)
+    return redirect("films:home")
