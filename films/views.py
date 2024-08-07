@@ -5,6 +5,7 @@ from random import randint
 
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.db.models import Avg, Count
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -12,6 +13,19 @@ from .models import Film, Rating
 
 
 module_dir = os.path.dirname(__file__)
+
+
+def top250(request):
+    films = Film.objects.annotate(
+        avr=Avg("ratings__rating"), votes=Count("ratings__rating")
+    ).order_by("-avr")[0:250]
+
+    paginator = Paginator(films, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj}
+    return render(request, "films/homepage.html", context)
 
 
 def add_films(request):
