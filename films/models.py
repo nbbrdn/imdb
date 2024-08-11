@@ -42,6 +42,9 @@ class Film(models.Model):
             .get("rating__count", 0.0)
         )
 
+    class Meta:
+        ordering = ("id",)
+
 
 class Rating(models.Model):
     film = models.ForeignKey(Film, on_delete=models.CASCADE, related_name="ratings")
