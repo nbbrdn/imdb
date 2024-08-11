@@ -29,10 +29,8 @@ Clone of IMDB using Django and HTMX. Goal is to test Django as the backend and H
     ./manage.py migrate
     ```
 
-## User Interface
-![alt text](docs/Screenshot_66.png)
-![alt text](docs/Screenshot_67.png)
-![alt text](docs/Screenshot_68.png)
+## Screenshot
+![alt text](docs/screenshot.png)
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
