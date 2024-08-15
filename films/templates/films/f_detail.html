@@ -18,7 +18,11 @@
             <div class="alert alert-light" role="alert">
                 IMDB Rating: <i class="bi bi-star-fill text-warning"></i>
                 <span class="mx-3">{{ film.average_rating|floatformat:1 }}/10 (reviews: {{ film.no_votes }})</span>
-                Your Rating: <i class="bi bi-star text-primary"></i> <span class="mx-3">8/10</span>
+                {% if rating %}
+                    Your Rating: <i class="bi bi-star-fill text-primary"></i> <span class="mx-3">{{ rating.rating }}</span>
+                {% else %}
+                    <i class="bi bi-star text-primary"></i> <button class="btn btn-outline-primary">RATE</button>
+                {% endif %}
             </div>
             <br>
             <h2>Top Cast</h2>

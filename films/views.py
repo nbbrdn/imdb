@@ -78,13 +78,17 @@ def film_detail(request, pk):
     duration = f"{hours}h {minutes}m"
     genres = film.genre.split(",")
 
-    context = {"film": film, "duration": duration, "genres": genres}
+    if request.user.is_authenticated:
+        rating = Rating.objects.filter(user=request.user, film=film).first()
+    else:
+        rating = ""
+
+    context = {"film": film, "duration": duration, "genres": genres, "rating": rating}
     return render(request, "films/f_detail.html", context)
 
 
 def add_rev(g_film, g_user, g_rating):
-    print(g_film)
-    Rating.objects.update_or_create(
+    obj, create = Rating.objects.get_or_create(
         film=get_object_or_404(Film, pk=g_film),
         user=get_object_or_404(User, pk=g_user),
         rating=g_rating,
