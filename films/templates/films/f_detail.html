@@ -34,9 +34,8 @@
 
                         <div 
                             x-show="isModalOpen" 
-                            x-on:click.away="isModalOpen = false"
-                            class="modal modal-dialog-centered" 
-                            id="vote_modal" 
+                            class="modal modal-dialog-centered"
+                            id="vote_modal"
                             tabindex="-1" 
                             aria-hidden="true"
                         >
@@ -55,18 +54,29 @@
                                         ></button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="row d-flex justify-content-center">
-                                            <p>Modal body text goes here.</p>
+                                        <div class="row d-flex justify-content-center"> 
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat1"  value="1"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat2"  value="2"  name="rating"></form></div> 
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat3"  value="3"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat4"  value="4"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat5"  value="5"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat6"  value="6"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat7"  value="7"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat8"  value="8"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat9"  value="9"  name="rating"></form></div>
+                                            <div class="col-1"><form action="." method="POST">{% csrf_token %}<inpit type="hidden" name="film" id="film" value="{{ film.id }}"><input type="submit" class="btn btn-primary" id="rat10" value="10" name="rating"></form></div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changs</button>
+                                        <button type="button" class="btn btn-warning" x-on:click="isModalOpen=false">
+                                            Cancel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 {% endif %}
             </div>
             <br>

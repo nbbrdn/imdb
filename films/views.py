@@ -71,19 +71,29 @@ def homepage(request):
 
 def film_detail(request, pk):
     film = get_object_or_404(Film, pk=pk)
-
     total_seconds = int(film.duration.total_seconds())
     hours = total_seconds // 3600
     minutes = (total_seconds % 3600) // 60
     duration = f"{hours}h {minutes}m"
     genres = film.genre.split(",")
 
-    if request.user.is_authenticated:
-        rating = Rating.objects.filter(user=request.user, film=film).first()
-    else:
-        rating = ""
+    context = {"film": film, "genres": genres, "dura": duration}
 
-    context = {"film": film, "duration": duration, "genres": genres, "rating": rating}
+    if request.method == "POST":
+        Rating.objects.update_or_create(
+            film=film,
+            user=get_object_or_404(User, pk=request.user.id),
+            rating=request.POST["rating"],
+        )
+        rated = Rating.objects.get(film=film, user=request.user)
+        context["rating"] = rated
+    else:
+        if request.user.is_authenticated:
+            rating = Rating.objects.filter(user=request.user, film=film).first()
+        else:
+            rating = ""
+        context["rating"] = rating
+
     return render(request, "films/f_detail.html", context)
 
 
